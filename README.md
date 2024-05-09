@@ -17,18 +17,20 @@ Simon Im (simon-im-security)
 
 ## Usage
 
-### For Ubuntu/RHEL:
+### Ubuntu/RHEL:
+Open Terminal and paste the following command:
 ```bash
 curl -o /tmp/linux_process_probe.sh https://raw.githubusercontent.com/simon-im-security/Process-Probe/main/linux_process_probe.sh && chmod +x /tmp/linux_process_probe.sh && /tmp/linux_process_probe.sh
 ```
 
-### For Mac:
+### Mac:
+Open Terminal and paste the following command:
 ```bash
 curl -o /tmp/mac_process_probe.sh https://raw.githubusercontent.com/simon-im-security/Process-Probe/main/mac_process_probe.sh && chmod +x /tmp/mac_process_probe.sh && /tmp/mac_process_probe.sh
 ```
 
-### For Windows:
-- Ensure PowerShell script execution policy allows running scripts. If not, set the execution policy with administrative privileges using the command:
+### Windows:
+Ensure PowerShell script execution policy allows running scripts. If not, set the execution policy with administrative privileges using the command:
 ```powershell
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/simon-im-security/Process-Probe/main/win_process_probe.ps1" -OutFile "$env:TEMP\win_process_probe.ps1"; Set-ExecutionPolicy RemoteSigned -Scope Process; Start-Process -FilePath "powershell.exe" -ArgumentList "-File $env:TEMP\win_process_probe.ps1" -Verb RunAs
 ```
