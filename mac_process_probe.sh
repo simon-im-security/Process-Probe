@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Author: Simon Im
+# Date: 9th May 2024
+# Version: 1.1
+# Title: Process Probe
+# Description: This script captures a snapshot of running processes before and after opening Activity Monitor,
+#              then compares the two lists to identify any discrepancies.
+
 # Function to list all processes
 list_processes() {
     ps -axo pid,ppid,command
@@ -18,6 +25,13 @@ close_activity_monitor() {
 log_message() {
     echo "$(date +'%Y-%m-%d %H:%M:%S') - $1"
 }
+
+# Introduction
+log_message "Process Probe - Version 1.1"
+log_message "Author: Simon Im"
+log_message "Date: 9th May 2024"
+log_message "Description: This script captures a snapshot of running processes before and after opening Activity Monitor,"
+log_message "             then compares the two lists to identify any discrepancies."
 
 # Close Activity Monitor if it's already open
 close_activity_monitor
