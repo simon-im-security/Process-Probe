@@ -1,6 +1,6 @@
 # Author: Simon Im
 # Date: 13th May 2024
-# Version: 1.2
+# Version: 1.3
 # Title: Process Probe
 # Description: This script captures a snapshot of running processes before and after opening Task Manager,
 #              then compares the two lists to identify any discrepancies.
@@ -28,7 +28,7 @@ function Log-Message {
 }
 
 # Introduction
-Log-Message "Process Probe - Version 1.2"
+Log-Message "Process Probe - Version 1.3"
 Log-Message "Author: Simon Im"
 Log-Message "Date: 13th May 2024"
 Log-Message "Description: This script captures a snapshot of running processes before and after opening Task Manager,"
@@ -60,16 +60,17 @@ $differences = Compare-Object -ReferenceObject $initialProcesses -DifferenceObje
 # Generate unique output file name
 $outputFile = "$env:TEMP\process_differences_$(Get-Date -Format 'yyyyMMddHHmmss').txt"
 
-# Header for the output file
-if ($differences.Count -eq 0) {
-    "No discrepancies found.`n`nNext Steps:`n1. If you suspect unauthorized activity, investigate further by reviewing system logs.`n2. Consider running antivirus or anti-malware scans to ensure system integrity." | Out-File -FilePath $outputFile
-} else {
-    "Discrepancies found. Please review the output file $outputFile.`nNote: Some differences might be legitimate. It's recommended to look them up online if unsure.`n`nNext Steps:`n1. Review the differences in the output file to identify any suspicious processes.`n2. Research any unfamiliar processes online to determine their legitimacy. Websites like ProcessLibrary.com can be helpful.`n3. If suspicious, take appropriate action such as terminating the process or seeking further assistance." | Out-File -FilePath $outputFile
-}
-
-# Save differences to the unique file
+# Save differences to the output file
 Log-Message "Saving differences to $outputFile..."
-$differences | Out-File -FilePath $outputFile -Append
+$differences | Out-File -FilePath $outputFile
+
+# Output results to the output file
+"`nRESULTS:`n" | Out-File -FilePath $outputFile -Append
+if ($differences.Count -eq 0) {
+    "No discrepancies found.`n`nNext Steps:`n1. If you suspect unauthorized activity, investigate further by reviewing system logs.`n2. Consider running antivirus or anti-malware scans to ensure system integrity." | Out-File -FilePath $outputFile -Append
+} else {
+    "Discrepancies found. Please review the output file $outputFile.`nNote: Some differences might be legitimate. It's recommended to look them up online if unsure.`n`nNext Steps:`n1. Review the differences in the output file to identify any suspicious processes.`n2. Research any unfamiliar processes online to determine their legitimacy. Websites like ProcessLibrary.com can be helpful.`n3. If suspicious, take appropriate action such as terminating the process or seeking further assistance." | Out-File -FilePath $outputFile -Append
+}
 
 # Log completion message
 Log-Message "Process comparison completed. Output saved to $outputFile"
