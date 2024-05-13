@@ -2,7 +2,7 @@
 
 # Author: Simon Im
 # Date: 13th May 2024
-# Version: 1.2
+# Version: 1.3
 # Title: Process Probe
 # Description: This script captures a snapshot of running processes before and after opening System Monitor,
 #              then compares the two lists to identify any discrepancies.
@@ -36,7 +36,7 @@ log_message() {
 }
 
 # Introduction
-log_message "Process Probe - Version 1.2"
+log_message "Process Probe - Version 1.3"
 log_message "Author: Simon Im"
 log_message "Date: 13th May 2024"
 log_message "Description: This script captures a snapshot of running processes before and after opening System Monitor,"
@@ -81,6 +81,7 @@ timestamp=$(date +'%Y%m%d%H%M%S')
 output_file="/tmp/process_differences_$timestamp.txt"
 
 # Header for the output file
+echo "" >> "$output_file" # Blank space line before the results
 if [ -z "$differences" ]; then
     echo "No discrepancies found." >> "$output_file"
     echo "" >> "$output_file"
