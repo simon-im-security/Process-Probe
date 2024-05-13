@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Author: Simon Im
-# Date: 9th May 2024
-# Version: 1.1
+# Date: 13th May 2024
+# Version: 1.2
 # Title: Process Probe
 # Description: This script captures a snapshot of running processes before and after opening Activity Monitor,
 #              then compares the two lists to identify any discrepancies.
@@ -27,7 +27,7 @@ log_message() {
 }
 
 # Introduction
-log_message "Process Probe - Version 1.1"
+log_message "Process Probe - Version 1.8"
 log_message "Author: Simon Im"
 log_message "Date: 9th May 2024"
 log_message "Description: This script captures a snapshot of running processes before and after opening Activity Monitor,"
@@ -56,13 +56,36 @@ after_processes=$(list_processes)
 log_message "Comparing processes..."
 differences=$(diff -u <(echo "$initial_processes") <(echo "$after_processes") | grep -E '^[+-][0-9]+')
 
-# Save differences to a file in /private/tmp
-output_file="/private/tmp/process_differences.txt"
+# Create a unique output file name with timestamp
+timestamp=$(date +'%Y%m%d%H%M%S')
+output_file="/private/tmp/process_differences_$timestamp.txt"
+
+# Save differences to the output file
 log_message "Saving differences to $output_file..."
-echo "$differences" > "$output_file"
+if [ -n "$differences" ]; then
+    echo "$differences" > "$output_file"
+fi
 
 # Log completion message
 log_message "Process comparison completed. Output saved to $output_file"
+
+# Output results to the output file
+echo "RESULTS:" >> "$output_file"
+if [ -z "$differences" ]; then
+    echo "No discrepancies found." >> "$output_file"
+    echo "" >> "$output_file"
+    echo "Next Steps:" >> "$output_file"
+    echo "1. If you suspect unauthorised activity, investigate further by reviewing system logs." >> "$output_file"
+    echo "2. Consider running antivirus or anti-malware scans to ensure system integrity." >> "$output_file"
+else
+    echo "Discrepancies found. Please review the output file $output_file." >> "$output_file"
+    echo "Note: Some differences might be legitimate. It's recommended to look them up online if unsure." >> "$output_file"
+    echo "" >> "$output_file"
+    echo "Next Steps:" >> "$output_file"
+    echo "1. Review the differences in the output file to identify any suspicious processes." >> "$output_file"
+    echo "2. Research any unfamiliar processes online to determine their legitimacy. Websites like ProcessLibrary.com can be helpful." >> "$output_file"
+    echo "3. If suspicious, take appropriate action such as terminating the process or seeking further assistance." >> "$output_file"
+fi
 
 # Open the file displaying the differences
 log_message "Opening $output_file..."
