@@ -1,7 +1,7 @@
 # Process Probe
 
 ## Overview
-Process Probe is a script designed to capture a snapshot of running processes before and after opening Task Manager (Windows), System Monitor (Ubuntu/RHEL), or Activity Monitor (macOS). It then compares the two lists to identify any discrepancies, which could indicate potentially malicious processes or system anomalies.
+Process Probe captures process snapshots before and after opening system monitors. It then compares them, uncovering hidden or harmful processes, targetting those that evade detection when activity monitors are activated.
 
 ### Terminal Screenshot:
 ![Terminal](https://github.com/simon-im-security/Process-Probe/blob/main/1_terminal.png)
