@@ -94,7 +94,7 @@ else
     echo "" >> "$output_file"
     echo "Next Steps:" >> "$output_file"
     echo "1. Review the differences in the output file to identify any suspicious processes." >> "$output_file"
-    echo "2. Research any unfamiliar processes online to determine their legitimacy. Websites like ProcessLibrary.com can be helpful." >> "$output_file"
+    echo "2. Research any unfamiliar processes online to determine their legitimacy." >> "$output_file"
     echo "3. If suspicious, take appropriate action such as terminating the process or seeking further assistance." >> "$output_file"
 fi
 
