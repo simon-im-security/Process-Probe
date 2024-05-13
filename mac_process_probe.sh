@@ -2,7 +2,7 @@
 
 # Author: Simon Im
 # Date: 13th May 2024
-# Version: 1.2
+# Version: 1.3
 # Title: Process Probe
 # Description: This script captures a snapshot of running processes before and after opening Activity Monitor,
 #              then compares the two lists to identify any discrepancies.
@@ -27,9 +27,9 @@ log_message() {
 }
 
 # Introduction
-log_message "Process Probe - Version 1.8"
+log_message "Process Probe - Version 1.3"
 log_message "Author: Simon Im"
-log_message "Date: 9th May 2024"
+log_message "Date: 13th May 2024"
 log_message "Description: This script captures a snapshot of running processes before and after opening Activity Monitor,"
 log_message "             then compares the two lists to identify any discrepancies."
 
@@ -66,10 +66,8 @@ if [ -n "$differences" ]; then
     echo "$differences" > "$output_file"
 fi
 
-# Log completion message
-log_message "Process comparison completed. Output saved to $output_file"
-
 # Output results to the output file
+echo "" >> "$output_file" # Blank space line before the results
 echo "RESULTS:" >> "$output_file"
 if [ -z "$differences" ]; then
     echo "No discrepancies found." >> "$output_file"
@@ -86,6 +84,9 @@ else
     echo "2. Research any unfamiliar processes online to determine their legitimacy. Websites like ProcessLibrary.com can be helpful." >> "$output_file"
     echo "3. If suspicious, take appropriate action such as terminating the process or seeking further assistance." >> "$output_file"
 fi
+
+# Log completion message
+log_message "Process comparison completed. Output saved to $output_file"
 
 # Open the file displaying the differences
 log_message "Opening $output_file..."
