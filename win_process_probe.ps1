@@ -69,7 +69,7 @@ $differences | Out-File -FilePath $outputFile
 if ($differences.Count -eq 0) {
     "No discrepancies found.`n`nNext Steps:`n1. If you suspect unauthorized activity, investigate further by reviewing system logs.`n2. Consider running antivirus or anti-malware scans to ensure system integrity." | Out-File -FilePath $outputFile -Append
 } else {
-    "Discrepancies found. Please review the output file $outputFile.`nNote: Some differences might be legitimate. It's recommended to look them up online if unsure.`n`nNext Steps:`n1. Review the differences in the output file to identify any suspicious processes.`n2. Research any unfamiliar processes online to determine their legitimacy. Websites like ProcessLibrary.com can be helpful.`n3. If suspicious, take appropriate action such as terminating the process or seeking further assistance." | Out-File -FilePath $outputFile -Append
+    "Discrepancies found. Please review the output file $outputFile.`nNote: Some differences might be legitimate. It's recommended to look them up online if unsure.`n`nNext Steps:`n1. Review the differences in the output file to identify any suspicious processes.`n2. Research any unfamiliar processes online to determine their legitimacy.`n3. If suspicious, take appropriate action such as terminating the process or seeking further assistance." | Out-File -FilePath $outputFile -Append
 }
 
 # Log completion message
