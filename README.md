@@ -1,36 +1,27 @@
-# Process Probe
+# Welcome to the Process Probe
 
-## Overview
-Process Probe captures process snapshots before and after opening system monitors. It then compares them, uncovering hidden or harmful processes, targetting those that evade detection when activity monitors are activated.
+Welcome to the Process Probe project! This tool helps in capturing and comparing the list of running processes before and after starting Task Manager, and generating a report on the differences.
 
-### Terminal Screenshot:
-![Terminal](https://github.com/simon-im-security/Process-Probe/blob/main/1_terminal.png)
+## Getting Started
 
-### Output Screenshot:
-![Output](https://github.com/simon-im-security/Process-Probe/blob/main/2_output.png)
+To get started with the Process Probe, follow these steps:
 
-## Author
-Simon Im (simon-im-security)
+### 1. Adjust Execution Policy
 
-## Version
-1.1 (9th May 2024)
+Before running the script, you'll need to ensure that your PowerShell execution policy allows the script to run. This can be done by setting the execution policy to `RemoteSigned` or `Unrestricted`. Run the following command in an elevated PowerShell session (Run as Administrator):
 
-## Usage
-
-### Ubuntu/RHEL:
-Open Terminal and paste the following command:
-```bash
-curl -o /tmp/linux_process_probe.sh https://raw.githubusercontent.com/simon-im-security/Process-Probe/main/linux_process_probe.sh && chmod +x /tmp/linux_process_probe.sh && /tmp/linux_process_probe.sh
-```
-
-### Mac:
-Open Terminal and paste the following command:
-```bash
-curl -o /tmp/mac_process_probe.sh https://raw.githubusercontent.com/simon-im-security/Process-Probe/main/mac_process_probe.sh && chmod +x /tmp/mac_process_probe.sh && /tmp/mac_process_probe.sh
-```
-
-### Windows:
-Ensure PowerShell script execution policy allows running scripts. If not, set the execution policy with administrative privileges using the command:
 ```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/simon-im-security/Process-Probe/main/win_process_probe.ps1" -OutFile "$env:TEMP\win_process_probe.ps1"; Set-ExecutionPolicy RemoteSigned -Scope Process; Start-Process -FilePath "powershell.exe" -ArgumentList "-File $env:TEMP\win_process_probe.ps1" -Verb RunAs
-```
+# Set the execution policy to RemoteSigned (allows running scripts downloaded from the internet if they are signed)
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+
+# Define the URL of the script
+$scriptUrl = "https://raw.githubusercontent.com/simon-im-security/Process-Probe/main/win_process_probe.ps1"
+
+# Define the path where the script will be downloaded
+$tempScriptPath = "$env:TEMP\win_process_probe.ps1"
+
+# Download the script
+Invoke-WebRequest -Uri $scriptUrl -OutFile $tempScriptPath
+
+# Execute the downloaded script
+. $tempScriptPath
